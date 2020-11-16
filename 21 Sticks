@@ -1,0 +1,29 @@
+from random import randint
+print("In this game, there are 21 sticks lying in a pile.\nPlayers take turns taking 1, 2, or 3 sticks.\nThe last person to take a stick wins.")
+
+sticks = 21
+step = 0
+last = 0
+while sticks > 0:
+  step += 1
+  print(f"\nRound {step}")
+  user_sticks = int(input("Enter the number of sticks: "))
+  if user_sticks < 1 or user_sticks > 3 or user_sticks > sticks:
+    print("incorrect_number_of_sticks")
+    continue
+  sticks -= user_sticks
+  last = 1
+  print(f"Only {sticks} sticks are left")
+  if sticks == 0:
+    break
+  comp_sticks = sticks % 4
+  if comp_sticks == 0:
+    comp_sticks = randint(1, min(3, sticks))
+  sticks -= comp_sticks
+  last = 0
+  print(f"Comp took {comp_sticks} sticks.")
+  print(f"Only {sticks} sticks left")
+if last == 1:
+  print("You won!!")
+else:
+  print("Computer won!!")
